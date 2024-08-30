@@ -14,7 +14,7 @@ export const incrementAsync = createAsyncThunk(
   }
 );
 
-export const productListSlice = createSlice({
+export const productSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
@@ -34,8 +34,8 @@ export const productListSlice = createSlice({
   },
 });
 
-export const { increment } = productListSlice.actions;
+export const { increment } = productSlice.actions;
 
 export const selectCount = (state) => state.counter.value;
 
-export default productListSlice.reducer;
+export default productSlice.reducer;
