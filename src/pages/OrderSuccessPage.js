@@ -10,11 +10,11 @@ function OrderSuccessPage() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
   useEffect(() => {
-    if (user?.id) { // Check if user and user.id are available
+    if (user?.id) { 
       dispatch(resetCartAsync(user.id));
       dispatch(resetOrder());
     }
-  }, [dispatch, user?.id]);
+  }, [dispatch, user]);
   return (
     <>
       {!params.id && <Navigate to="/" replace={true}></Navigate>}

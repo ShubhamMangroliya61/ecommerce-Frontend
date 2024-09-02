@@ -18,6 +18,8 @@ import { fetchItemByUserIdAsync } from "./Redux/slice/cartSlice";
 import { selectLoggedInUser } from "./Redux/slice/authSlice";
 import PageNotFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserOrder from "./features/user/UserOrders";
+import UserOrderPage from "./pages/UserOrderPage";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +66,12 @@ const router = createBrowserRouter([
     path: "/order-success/:id",
     element: (
       <OrderSuccessPage></OrderSuccessPage>
+    ),
+  },
+  {
+    path: "/orders",
+    element: (
+      <UserOrderPage></UserOrderPage>
     ),
   },
   {
