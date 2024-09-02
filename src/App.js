@@ -1,9 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import Home from './pages/Home';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
+import React, { useEffect } from "react";
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 import {
   createBrowserRouter,
@@ -11,14 +9,24 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import CartPage from './pages/CartPage';
-import Checkout from './pages/Checkout';
-import ProductDetailsPage from './pages/ProductDetailsPage';
+import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import Protected from "./features/auth/components/Protected";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItemByUserIdAsync } from "./Redux/slice/cartSlice";
+import { selectLoggedInUser } from "./Redux/slice/authSlice";
+import PageNotFound from "./pages/404";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Home></Home>,
+    element: (
+      <Protected>
+        <Home></Home>
+      </Protected>
+    ),
   },
   {
     path: "/login",
@@ -30,22 +38,54 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <CartPage></CartPage>,
+    element: (
+      <Protected>
+        <CartPage></CartPage>
+      </Protected>
+    ),
   },
   {
     path: "/checkout",
-    element: <Checkout></Checkout>,
+    element: (
+      <Protected>
+        <Checkout></Checkout>
+      </Protected>
+    ),
   },
   {
-    path: "/product-details",
-    element: <ProductDetailsPage></ProductDetailsPage>,
+    path: "/product-details/:id",
+    element: (
+      <Protected>
+        <ProductDetailsPage></ProductDetailsPage>
+      </Protected>
+    ),
+  },
+  {
+    path: "/order-success/:id",
+    element: (
+      <OrderSuccessPage></OrderSuccessPage>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <PageNotFound></PageNotFound>
+    ),
   },
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchItemByUserIdAsync(user.id));
+    }
+  }, [dispatch, user]);
+
   return (
     <div className="App">
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </div>
   );
 }
