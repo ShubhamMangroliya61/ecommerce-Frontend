@@ -110,6 +110,7 @@ export const authSlice = createSlice({
       .addCase(signOutAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.loggedInUser = null;
+        console.log(state.loggedInUser);
       })
   },
 });

@@ -34,9 +34,9 @@ export default function UserProfile() {
     dispatch(updateUserAsync(newUser));
   };
 
-  const handleEdit = (updateAddress, index) => {
+  const handleEdit = (addressUpdate, index) => {
     const newUser = { ...user, addresses: [...user.addresses] };
-    newUser.addresses.splice(index, 1);
+    newUser.addresses.splice(index, 1, addressUpdate);
     dispatch(updateUserAsync(newUser));
     setEdit(-1);
   };
@@ -45,10 +45,10 @@ export default function UserProfile() {
       <div>
         <div className="mx-auto max-w-7xl px-4 sm:px-2 lg:px-2 bg-white mt-2 border-2 border-gray-200 rounded-md">
           <div className="px-4 py-2 sm:px-6">
-            <h1 className="text-3xl my-2 font-bold tracking-tight text-gray-900">
+            <h1 className="text-xl my-2 font-bold tracking-tight text-gray-900">
               Name: {user.name ? user.name : "New User"}
             </h1>
-            <h1 className="text-xl my-2 font-bold tracking-tight text-red-900">
+            <h1 className="text-lg my-2 font-bold tracking-tight text-red-900">
               Email Address :{user.email}
             </h1>
           </div>
@@ -56,7 +56,7 @@ export default function UserProfile() {
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
             <p className="mt-0.5 text-xl text-gray-500">Your Address:</p>
             {user.addresses.map((address, index) => (
-              <div>
+              <div key={index}>
                 {edit === index ? (
                   <form
                     onSubmit={handleSubmit((data) => {

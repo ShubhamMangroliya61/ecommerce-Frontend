@@ -9,7 +9,7 @@ function Logout() {
 
   useEffect(() => {
     dispatch(signOutAsync());
-  });
+  },[user]);
 
   return <>{!user && <Navigate to="/login" replace={true}></Navigate>}</>;
 }

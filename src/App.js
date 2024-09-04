@@ -23,6 +23,7 @@ import UserOrderPage from "./pages/UserOrderPage";
 import UserProfile from "./features/user/UserProfile";
 import { fecthLoggedInUserAsync } from "./Redux/slice/userSlice";
 import Logout from "./features/auth/components/Logout";
+import UserProfilePage from "./pages/UserProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -79,15 +80,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: (
-          <UserProfile></UserProfile>
-    ),
+    element: <UserProfilePage></UserProfilePage>,
   },
   {
     path: "/logout",
-    element: (
-          <Logout></Logout>
-    ),
+    element: <Logout></Logout>,
   },
   {
     path: "*",
@@ -101,7 +98,7 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemByUserIdAsync(user.id));
-      dispatch(fecthLoggedInUserAsync(user.id))
+      dispatch(fecthLoggedInUserAsync(user.id));
     }
   }, [dispatch, user]);
 
