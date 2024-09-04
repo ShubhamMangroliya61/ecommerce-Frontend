@@ -35,10 +35,10 @@ export function checkUser(loginInfo) {
       if (password === data[0].password) {
         resolve({ data: data[0] });
       } else {
-        reject({ messages: "email and password invalid" });
+        reject({ message: "email and password invalid" });
       }
     } else {
-      reject({ messages: "user not found" });
+      reject({ message: "user not found" });
     }
   });
 }
@@ -110,7 +110,6 @@ export const authSlice = createSlice({
       .addCase(signOutAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.loggedInUser = null;
-        console.log(state.loggedInUser);
       })
   },
 });
