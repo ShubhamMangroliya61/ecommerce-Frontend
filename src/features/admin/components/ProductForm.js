@@ -6,7 +6,6 @@ import {
 } from "../../../Redux/slice/productSlice";
 import { useSelector } from "react-redux";
 
-
 function ProductForm() {
   const {
     register,
@@ -48,7 +47,7 @@ function ProductForm() {
   const categories = useSelector(selectCategories);
   return (
     <>
-      <div className="space-y-12 bg-white p-12">
+      <div className="space-y-12 bg-white p-2">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Add Product
@@ -105,52 +104,59 @@ function ProductForm() {
               </p>
             </div>
 
-            <div className="col-span-full">
-              <label
-                htmlFor="brand"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Brand
-              </label>
-              <div className="mt-2">
-                <select
-                  {...register("brand", {
-                    required: "brand is required",
-                  })}
+            <div className="col-span-full flex">
+            <div className="w-full sm:w-1/2 px-1">
+                <label
+                  htmlFor="brand"
+                  className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  <option value="">--choose brand--</option>
-                  {brands.map((brand) => (
-                    <option key={brand.value} value={brand.value}>
-                      {brand.label}
-                    </option>
-                  ))}
-                </select>
+                  Brand
+                </label>
+                <div className="mt-2">
+                  <select
+                    className="rounded-lg w-full"
+                    id="brand"
+                    {...register("brand", {
+                      required: "Brand is required",
+                    })}
+                  >
+                    <option value="">--choose brand--</option>
+                    {brands.map((brand) => (
+                      <option key={brand.value} value={brand.value}>
+                        {brand.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="w-full sm:w-1/2 px-2">
+                <label
+                  htmlFor="category"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Category
+                </label>
+                <div className="mt-2">
+                  <select
+                    className="rounded-lg w-full"
+                    id="category"
+                    {...register("category", {
+                      required: "Category is required",
+                    })}
+                  >
+                    <option value="">--choose category--</option>
+                    {categories.map((category) => (
+                      <option key={category.value} value={category.value}>
+                        {category.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 
-            <div className="col-span-full">
-              <label
-                htmlFor="colors"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Colors
-              </label>
-              <div className="mt-2">
-                {colors.map((color) => (
-                  <>
-                    <input
-                      type="checkbox"
-                      {...register("colors", {})}
-                      key={color.id}
-                      value={color.id}
-                    />{" "}
-                    {color.name}
-                  </>
-                ))}
-              </div>
-            </div>
-
-            <div className="col-span-full">
+            <div className="col-span-full flex px-1">
+              <div className="w-1/4">
               <label
                 htmlFor="sizes"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -159,39 +165,44 @@ function ProductForm() {
               </label>
               <div className="mt-2">
                 {sizes.map((size) => (
-                  <>
+                  <div key={size.id}>
                     <input
+                     className="rounded-sm"
                       type="checkbox"
-                      {...register("sizes", {})}
-                      key={size.id}
+                      id={`size-${size.id}`}
+                      {...register("sizes")}
                       value={size.id}
-                    />{" "}
-                    {size.name}
-                  </>
+                    />
+                    <label htmlFor={`size-${size.id}`} className="ml-2">
+                      {size.name}
+                    </label>
+                  </div>
                 ))}
               </div>
-            </div>
-
-            <div className="col-span-full">
+              </div>
+              <div className="sm:w-1/2 w-1/2 px-2">
               <label
-                htmlFor="category"
+                htmlFor="colors"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Category
+                Colors
               </label>
               <div className="mt-2">
-                <select
-                  {...register("category", {
-                    required: "category is required",
-                  })}
-                >
-                  <option value="">--choose category--</option>
-                  {categories.map((category) => (
-                    <option key={category.value} value={category.value}>
-                      {category.label}
-                    </option>
-                  ))}
-                </select>
+                {colors.map((color) => (
+                  <div key={color.id}>
+                    <input
+                    className="rounded-sm"
+                      type="checkbox"
+                      id={`color-${color.id}`}
+                      {...register("colors")}
+                      value={color.id}
+                    />
+                    <label htmlFor={`color-${color.id}`} className="ml-2">
+                      {color.name}
+                    </label>
+                  </div>
+                ))}
+              </div>
               </div>
             </div>
 
