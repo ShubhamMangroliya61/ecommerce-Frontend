@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../helper/axioseInstance";
+import { updateUser } from "./userSlice";
 
 const initialState = {
   loggedInUser: null,
@@ -36,17 +37,7 @@ export function checkUser(loginInfo) {
     }
   });
 }
-export function updateUser(update) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/users/"+update.id, {
-      method: "PATCH",
-      body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
+
 export const createUserAsync = createAsyncThunk(
   "user/createUser",
   async (data) => {

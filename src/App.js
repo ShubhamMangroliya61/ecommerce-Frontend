@@ -20,6 +20,9 @@ import PageNotFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserOrder from "./features/user/UserOrders";
 import UserOrderPage from "./pages/UserOrderPage";
+import UserProfile from "./features/user/UserProfile";
+import { fecthLoggedInUserAsync } from "./Redux/slice/userSlice";
+import Logout from "./features/auth/components/Logout";
 
 const router = createBrowserRouter([
   {
@@ -64,21 +67,31 @@ const router = createBrowserRouter([
   },
   {
     path: "/order-success/:id",
-    element: (
-      <OrderSuccessPage></OrderSuccessPage>
-    ),
+    element: <OrderSuccessPage></OrderSuccessPage>,
   },
   {
     path: "/orders",
     element: (
-      <UserOrderPage></UserOrderPage>
+      <Protected>
+        <UserOrderPage></UserOrderPage>
+      </Protected>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+          <UserProfile></UserProfile>
+    ),
+  },
+  {
+    path: "/logout",
+    element: (
+          <Logout></Logout>
     ),
   },
   {
     path: "*",
-    element: (
-      <PageNotFound></PageNotFound>
-    ),
+    element: <PageNotFound></PageNotFound>,
   },
 ]);
 
@@ -88,6 +101,7 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemByUserIdAsync(user.id));
+      dispatch(fecthLoggedInUserAsync(user.id))
     }
   }, [dispatch, user]);
 
