@@ -24,6 +24,10 @@ import UserProfile from "./features/user/UserProfile";
 import { fecthLoggedInUserAsync } from "./Redux/slice/userSlice";
 import Logout from "./features/auth/components/Logout";
 import UserProfilePage from "./pages/UserProfilePage";
+import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
+import AdminHome from "./pages/AdminHome";
+import AdminProductDetailsPage from "./pages/AdminProductDetailsPage";
+import AdminProductForm from "./pages/AdminProductForm";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,14 @@ const router = createBrowserRouter([
       <Protected>
         <Home></Home>
       </Protected>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedAdmin>
+        <AdminHome></AdminHome>
+      </ProtectedAdmin>
     ),
   },
   {
@@ -59,11 +71,27 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/product-details/:id",
+    path: "/admin/product-details/:id",
     element: (
       <Protected>
         <ProductDetailsPage></ProductDetailsPage>
       </Protected>
+    ),
+  },
+  {
+    path: "/admin/product-form",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductForm></AdminProductForm>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/product-details/:id",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductDetailsPage></AdminProductDetailsPage>
+      </ProtectedAdmin>
     ),
   },
   {

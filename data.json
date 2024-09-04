@@ -11880,6 +11880,7 @@
       "id": "454a",
       "email": "shubham@gmail.com",
       "password": "Shubham123@",
+      "role": "user",
       "addresses": [
         {
           "name": "shubham mangroliya",
@@ -11896,10 +11897,145 @@
       "id": "fd9a",
       "email": "viral@gmail.com",
       "password": "Shubham123@",
+      "role": "user",
       "addresses": []
+    },
+    {
+      "id": "cb7e",
+      "email": "admin@gmail.com",
+      "password": "Admin123@",
+      "addresses": [],
+      "role": "admin"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "11",
+      "title": "Annibale Colombo Bed",
+      "description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
+      "category": "furniture",
+      "price": 1899.99,
+      "discountPercentage": 0.29,
+      "rating": 4.14,
+      "stock": 47,
+      "tags": [
+        "furniture",
+        "beds"
+      ],
+      "brand": "Annibale Colombo",
+      "sku": "4KMDTZWF",
+      "weight": 3,
+      "dimensions": {
+        "width": 28.75,
+        "height": 26.88,
+        "depth": 24.47
+      },
+      "warrantyInformation": "2 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 4,
+          "comment": "Great value for money!",
+          "date": "2024-05-23T08:56:21.620Z",
+          "reviewerName": "Julian Newton",
+          "reviewerEmail": "julian.newton@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Would buy again!",
+          "date": "2024-05-23T08:56:21.620Z",
+          "reviewerName": "Madison Collins",
+          "reviewerEmail": "madison.collins@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Would buy again!",
+          "date": "2024-05-23T08:56:21.620Z",
+          "reviewerName": "Clara Berry",
+          "reviewerEmail": "clara.berry@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 1,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.620Z",
+        "updatedAt": "2024-05-23T08:56:21.620Z",
+        "barcode": "7113807059215",
+        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/1.png",
+        "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/2.png",
+        "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/3.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/thumbnail.png",
+      "quantity": 1,
+      "user": "454a"
+    },
+    {
+      "id": "107",
+      "title": "Beats Flex Wireless Earphones",
+      "description": "The Beats Flex Wireless Earphones offer a comfortable and versatile audio experience. With magnetic earbuds and up to 12 hours of battery life, they are ideal for everyday use.",
+      "category": "mobile-accessories",
+      "price": 49.99,
+      "discountPercentage": 8.27,
+      "rating": 4.17,
+      "stock": 49,
+      "tags": [
+        "electronics",
+        "wireless earphones"
+      ],
+      "brand": "Beats",
+      "sku": "7N15J2UK",
+      "weight": 6,
+      "dimensions": {
+        "width": 23.49,
+        "height": 15.22,
+        "depth": 20.05
+      },
+      "warrantyInformation": "1 week warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Very satisfied!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Hannah Robinson",
+          "reviewerEmail": "hannah.robinson@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Awesome product!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Grace Perry",
+          "reviewerEmail": "grace.perry@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Very satisfied!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Grayson Coleman",
+          "reviewerEmail": "grayson.coleman@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 19,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.624Z",
+        "updatedAt": "2024-05-23T08:56:21.624Z",
+        "barcode": "4068884711976",
+        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/mobile-accessories/Beats%20Flex%20Wireless%20Earphones/1.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/mobile-accessories/Beats%20Flex%20Wireless%20Earphones/thumbnail.png",
+      "quantity": 1,
+      "user": "454a"
+    }
+  ],
   "orders": [
     {
       "id": "d235",
