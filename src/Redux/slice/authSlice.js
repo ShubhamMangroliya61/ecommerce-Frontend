@@ -6,7 +6,7 @@ const initialState = {
   loggedInUser: null,
   status: "idle",
   error :null,
-  
+
 };
 
 export function createUser(userData) {
@@ -18,6 +18,11 @@ export function createUser(userData) {
     });
     const data = await response.json();
     resolve({ data });
+  });
+}
+export function signOut(userId) {
+  return new Promise(async (resolve) => {
+    resolve({ data:'success' });
   });
 }
 export function checkUser(loginInfo) {
@@ -52,6 +57,13 @@ export const checkUserAsync = createAsyncThunk(
     return response.data;
   }
 );
+export const signOutAsync = createAsyncThunk(
+  "user/signOut",
+  async (data) => {
+    const response = await signOut(data);
+    return response.data;
+  }
+);
 export const updateUserAsync = createAsyncThunk(
   "user/updateUser",
   async (data) => {
@@ -79,6 +91,7 @@ export const authSlice = createSlice({
       .addCase(checkUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.loggedInUser = action.payload;
+
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -90,6 +103,13 @@ export const authSlice = createSlice({
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.loggedInUser = action.payload;
+      })
+      .addCase(signOutAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(signOutAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.loggedInUser = null;
       })
   },
 });
