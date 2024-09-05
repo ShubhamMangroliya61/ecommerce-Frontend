@@ -36,6 +36,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import Pagination from "../../common/Pagination";
 export default function AdminProductList() {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -193,9 +194,9 @@ export default function AdminProductList() {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-              <div>
+                <div>
                   <Link
-                  to="/admin/product-form"
+                    to="/admin/product-form"
                     type="submit"
                     className="rounded-md my-2 mx-10 bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
@@ -213,7 +214,7 @@ export default function AdminProductList() {
               handlePage={handlePage}
               page={page}
               setPage={setPage}
-              totalItem={totalItem}
+              totalItems={totalItem}
             />
           </div>
         </main>
@@ -286,7 +287,7 @@ function MobileFilter({
                 <DisclosurePanel className="pt-6">
                   <div className="space-y-6">
                     {section.options.map((option, optionIdx) => (
-                      <div key={option.value} className="flex items-center">
+                      <div key={optionIdx} className="flex items-center">
                         <input
                           onChange={(e) => HandelFilter(e, section, option)}
                           defaultValue={option.value}
@@ -371,13 +372,10 @@ function ProductGrid({ products }) {
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-            {products.map((product) => (
-              <div>
+            {products.map((product, index) => (
+              <div key={index}>
                 <Link to={`/product-details/${product.id}`} key={product.id}>
-                  <div
-                    key={product.id}
-                    className="group relative border-solid border-2 p-2 border-gray-200 rounded-md"
-                  >
+                  <div className="group relative border-solid border-2 p-2 border-gray-200 rounded-md">
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                       <img
                         alt={product.tile}
@@ -407,23 +405,33 @@ function ProductGrid({ products }) {
                         <p className="text-sm block font-medium text-gray-900">
                           $
                           {Math.round(
-                            product.price * (1 - product.discountPrice / 100)
+                            product.price *
+                              (1 - product.discountPercentage / 100)
                           )}
                         </p>
                         <p className="text-sm block line-through font-medium text-gray-400">
                           ${product.price}
                         </p>
                       </div>
+                      
                     </div>
+                    {product.deleted && (
+                        <div>
+                          <p className="text-sm text-red-600">
+                            product deleted
+                          </p>
+                        </div>
+                      )}
                   </div>
                 </Link>
-                <div>
-                  <button
+                <div className="my-2">
+                  <Link
                     type="submit"
-                    className="rounded-md my-2 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    to={`/admin/product-form/edit/${product.id}`}
+                    className="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Edit Product
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -433,94 +441,4 @@ function ProductGrid({ products }) {
     </div>
   );
 }
-function Pagination({ handlePage, page, setPage, totalItem, PAGE_SIZE = 12 }) {
-  const totalPages = Math.ceil(totalItem / PAGE_SIZE);
-  const startItem = (page - 1) * PAGE_SIZE + 1;
-  return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            if (page > 1) handlePage(page - 1);
-          }}
-          className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
-            page === 1 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Previous
-        </a>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            if (page < totalPages) handlePage(page + 1);
-          }}
-          className={`relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
-            page === totalPages ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Next
-        </a>
-      </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <div className="text-sm text-gray-700">
-            Showing <span className="font-medium">{startItem}</span> to{" "}
-            <span className="font-medium">
-              {page * PAGE_SIZE > totalItem ? totalItem : page * PAGE_SIZE}
-            </span>{" "}
-            of <span className="font-medium">{totalItem}</span> results
-          </div>
-        </div>
-        <div>
-          <nav
-            aria-label="Pagination"
-            className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-          >
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (page > 1) handlePage(page - 1);
-              }}
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Previous</span>
-              <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
-            </a>
 
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <div
-                key={index}
-                onClick={() => handlePage(index + 1)}
-                aria-current={page === index + 1 ? "page" : undefined}
-                className={`relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-                  ${
-                    page === index + 1
-                      ? "bg-indigo-600 text-white"
-                      : "text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50"
-                  }`}
-              >
-                {index + 1}
-              </div>
-            ))}
-
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (page < totalPages) handlePage(page + 1);
-              }}
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Next</span>
-              <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
-            </a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  );
-}

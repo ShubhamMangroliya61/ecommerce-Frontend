@@ -36,7 +36,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { PAGE_SIZE } from "../../../Constants/constants";
+import Pagination from "../../common/Pagination";
 export default function ProductList() {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -61,14 +61,13 @@ export default function ProductList() {
     {
       id: "category",
       name: "Category",
-      options: categories
+      options: categories,
     },
     {
       id: "brand",
       name: "Brand",
-      options: brands
+      options: brands,
     },
-    
   ];
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -94,20 +93,22 @@ export default function ProductList() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const pagination = { _page: page, _per_page: 12 };
-        await dispatch(fetchAllProductAsyncByFilter({ filter, sort, pagination }));
+        const pagination = { _page: page, _per_page: 10 };
+        await dispatch(
+          fetchAllProductAsyncByFilter({ filter, sort, pagination })
+        );
       } catch (err) {
-        console.error('Failed to fetch product:', err);
+        console.error("Failed to fetch product:", err);
       }
     };
     fetchProduct();
-  }, [dispatch, filter, sort,page]);
+  }, [dispatch, filter, sort, page]);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchBrandAsync());
     dispatch(fetchCategoryAsync());
-  },[dispatch])
-  
+  }, [dispatch]);
+
   return (
     <div className="bg-white">
       <div>
@@ -200,7 +201,12 @@ export default function ProductList() {
 
           {/*pagination for product*/}
           <div>
-            <Pagination handlePage={handlePage} page={page} setPage={setPage} totalItem={totalItem}/>
+            <Pagination
+              handlePage={handlePage}
+              page={page}
+              setPage={setPage}
+              totalItems={totalItem}
+            />
           </div>
         </main>
       </div>
@@ -390,7 +396,8 @@ function ProductGrid({ products }) {
                       <p className="text-sm block font-medium text-gray-900">
                         $
                         {Math.round(
-                          product.price * (1 - product.discountPrice / 100)
+                          product.price *
+                            (1 - product.discountPercentage/ 100)
                         )}
                       </p>
                       <p className="text-sm block line-through font-medium text-gray-400">
@@ -398,107 +405,15 @@ function ProductGrid({ products }) {
                       </p>
                     </div>
                   </div>
+                  {product.stock <= 0 && (
+                  <div>
+                    <p className="text-sm text-red-400">out of stock</p>
+                  </div>
+                )}
                 </div>
               </Link>
             ))}
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-function Pagination({
-  handlePage,
-  page,
-  setPage,
-  totalItem ,
-  PAGE_SIZE = 12,
-}) {
-  const totalPages = Math.ceil(totalItem / PAGE_SIZE);
-  const startItem = (page - 1) * PAGE_SIZE + 1;
-  return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            if (page > 1) handlePage(page - 1);
-          }}
-          className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
-            page === 1 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Previous
-        </a>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            if (page < totalPages) handlePage(page + 1);
-          }}
-          className={`relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
-            page === totalPages ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Next
-        </a>
-      </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <div className="text-sm text-gray-700">
-            Showing <span className="font-medium">{startItem}</span> to{" "}
-            <span className="font-medium">
-              {page * PAGE_SIZE > totalItem ? totalItem : page * PAGE_SIZE}
-            </span>{" "}
-            of <span className="font-medium">{totalItem}</span> results
-          </div>
-        </div>
-        <div>
-          <nav
-            aria-label="Pagination"
-            className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-          >
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (page > 1) handlePage(page - 1);
-              }}
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Previous</span>
-              <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
-            </a>
-
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <div
-                key={index}
-                onClick={() => handlePage(index + 1)}
-                aria-current={page === index + 1 ? "page" : undefined}
-                className={`relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-                  ${
-                    page === index + 1
-                      ? "bg-indigo-600 text-white"
-                      : "text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50"
-                  }`}
-              >
-                {index + 1}
-              </div>
-            ))}
-
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (page < totalPages) handlePage(page + 1);
-              }}
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Next</span>
-              <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
-            </a>
-          </nav>
         </div>
       </div>
     </div>

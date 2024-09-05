@@ -3,13 +3,12 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchProductById,
   fetchProductByIdAsync,
   selectProductById,
 } from "../../../Redux/slice/productSlice";
 import { useParams } from "react-router-dom";
 import { selectLoggedInUser } from "../../../Redux/slice/authSlice";
-import { addToCartAsync } from "../../../Redux/slice/cartSlice";
+import { addToCartAsync, selectedCart } from "../../../Redux/slice/cartSlice";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -41,6 +40,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector(selectProductById);
   const user = useSelector(selectLoggedInUser);
+  const items = useSelector(selectedCart);
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -58,7 +58,18 @@ export default function ProductDetails() {
 
   const handleCart = async (e) => {
     e.preventDefault();
-    await dispatch(addToCartAsync({ ...product, quantity: 1, user: user.id }));
+    if (!items.some((item) => item.productId === product.id)) {
+      const newItem = {
+        ...product,
+        productId: product.id,
+        quantity: 1,
+        user: user.id,
+      };
+      delete newItem["id"];
+      await dispatch(addToCartAsync(newItem));
+    } else {
+      console.log("item alredy added");
+    }
   };
   return (
     <div className="bg-white">
@@ -213,12 +224,6 @@ export default function ProductDetails() {
                 <div className="mt-10">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Size guide
-                    </a>
                   </div>
 
                   <fieldset aria-label="Choose a size" className="mt-4">

@@ -18,9 +18,7 @@ import { fetchItemByUserIdAsync } from "./Redux/slice/cartSlice";
 import { selectLoggedInUser } from "./Redux/slice/authSlice";
 import PageNotFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-import UserOrder from "./features/user/UserOrders";
 import UserOrderPage from "./pages/UserOrderPage";
-import UserProfile from "./features/user/UserProfile";
 import { fecthLoggedInUserAsync } from "./Redux/slice/userSlice";
 import Logout from "./features/auth/components/Logout";
 import UserProfilePage from "./pages/UserProfilePage";
@@ -28,6 +26,8 @@ import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import AdminHome from "./pages/AdminHome";
 import AdminProductDetailsPage from "./pages/AdminProductDetailsPage";
 import AdminProductForm from "./pages/AdminProductForm";
+import AdminOrder from "./features/admin/components/AdminOrder";
+import AdminOrderPage from "./pages/AdminOrderPage";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +87,22 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: '/admin/orders',
+    element: (
+      <ProtectedAdmin>
+        <AdminOrderPage></AdminOrderPage>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: '/admin/product-form/edit/:id',
+    element: (
+      <ProtectedAdmin>
+        <AdminProductForm></AdminProductForm>
+      </ProtectedAdmin>
+    ),
+  },
+  {
     path: "/product-details/:id",
     element: (
       <ProtectedAdmin>
@@ -128,7 +144,7 @@ function App() {
       dispatch(fetchItemByUserIdAsync(user.id));
       dispatch(fecthLoggedInUserAsync(user.id));
     }
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   return (
     <div className="App">

@@ -5,7 +5,7 @@
       "title": "Essence Mascara Lash Princess",
       "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
       "category": "beauty",
-      "price": 9.99,
+      "price": 15,
       "discountPercentage": 7.17,
       "rating": 4.94,
       "stock": 5,
@@ -56,9 +56,22 @@
         "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png",
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png",
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png",
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
+      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+      "sizes": false,
+      "colors": false,
+      "highlight1": "",
+      "highlights": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "deleted": true
     },
     {
       "id": "2",
@@ -11803,6 +11816,43 @@
         "https://cdn.dummyjson.com/products/images/womens-watches/Women's%20Wrist%20Watch/3.png"
       ],
       "thumbnail": "https://cdn.dummyjson.com/products/images/womens-watches/Women's%20Wrist%20Watch/thumbnail.png"
+    },
+    {
+      "id": "0305",
+      "title": "iphone 13",
+      "description": "iphone 13 black 128",
+      "brand": "Apple",
+      "category": "smartphones",
+      "sizes": false,
+      "colors": [
+        "white",
+        "gray",
+        "black"
+      ],
+      "price": "5000",
+      "discountPercentage": "5",
+      "stock": "50",
+      "thumbnail": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/thumbnail.png",
+      "image1": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/1.png",
+      "image2": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/2.png",
+      "image3": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/3.png",
+      "highlight1": "Highlight1",
+      "highlight2": "Highlight2",
+      "highlight3": "Highlight3",
+      "highlight4": "Highlight4",
+      "images": [
+        "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/1.png",
+        "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/2.png",
+        "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/3.png",
+        "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/thumbnail.png"
+      ],
+      "highlights": [
+        "Highlight1",
+        "Highlight2",
+        "Highlight3",
+        "Highlight4"
+      ],
+      "rating": 0
     }
   ],
   "category": [
@@ -11910,128 +11960,128 @@
   ],
   "cart": [
     {
-      "id": "11",
-      "title": "Annibale Colombo Bed",
-      "description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
-      "category": "furniture",
-      "price": 1899.99,
-      "discountPercentage": 0.29,
-      "rating": 4.14,
-      "stock": 47,
+      "id": "1",
+      "title": "Essence Mascara Lash Princess",
+      "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+      "category": "beauty",
+      "price": 9.99,
+      "discountPercentage": 7.17,
+      "rating": 4.94,
+      "stock": 5,
       "tags": [
-        "furniture",
-        "beds"
+        "beauty",
+        "mascara"
       ],
-      "brand": "Annibale Colombo",
-      "sku": "4KMDTZWF",
-      "weight": 3,
+      "brand": "Essence",
+      "sku": "RCH45Q1A",
+      "weight": 2,
       "dimensions": {
-        "width": 28.75,
-        "height": 26.88,
-        "depth": 24.47
+        "width": 23.17,
+        "height": 14.43,
+        "depth": 28.01
       },
-      "warrantyInformation": "2 year warranty",
-      "shippingInformation": "Ships overnight",
-      "availabilityStatus": "In Stock",
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "Low Stock",
       "reviews": [
         {
-          "rating": 4,
-          "comment": "Great value for money!",
-          "date": "2024-05-23T08:56:21.620Z",
-          "reviewerName": "Julian Newton",
-          "reviewerEmail": "julian.newton@x.dummyjson.com"
+          "rating": 2,
+          "comment": "Very unhappy with my purchase!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "John Doe",
+          "reviewerEmail": "john.doe@x.dummyjson.com"
+        },
+        {
+          "rating": 2,
+          "comment": "Not as described!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Nolan Gonzalez",
+          "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
         },
         {
           "rating": 5,
-          "comment": "Would buy again!",
-          "date": "2024-05-23T08:56:21.620Z",
-          "reviewerName": "Madison Collins",
-          "reviewerEmail": "madison.collins@x.dummyjson.com"
+          "comment": "Very satisfied!",
+          "date": "2024-05-23T08:56:21.618Z",
+          "reviewerName": "Scarlett Wright",
+          "reviewerEmail": "scarlett.wright@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 24,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.618Z",
+        "updatedAt": "2024-05-23T08:56:21.618Z",
+        "barcode": "9164035109868",
+        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+      "quantity": 1,
+      "user": "cb7e"
+    },
+    {
+      "id": "8",
+      "title": "Dior J'adore",
+      "description": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
+      "category": "fragrances",
+      "price": 89.99,
+      "discountPercentage": 17.44,
+      "rating": 3.31,
+      "stock": 91,
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "brand": "Dior",
+      "sku": "E70NB03B",
+      "weight": 10,
+      "dimensions": {
+        "width": 21.51,
+        "height": 7,
+        "depth": 26.51
+      },
+      "warrantyInformation": "Lifetime warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Fast shipping!",
+          "date": "2024-05-23T08:56:21.619Z",
+          "reviewerName": "Zoe Nicholson",
+          "reviewerEmail": "zoe.nicholson@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Excellent quality!",
+          "date": "2024-05-23T08:56:21.619Z",
+          "reviewerName": "Addison Wright",
+          "reviewerEmail": "addison.wright@x.dummyjson.com"
         },
         {
           "rating": 4,
           "comment": "Would buy again!",
-          "date": "2024-05-23T08:56:21.620Z",
+          "date": "2024-05-23T08:56:21.619Z",
           "reviewerName": "Clara Berry",
           "reviewerEmail": "clara.berry@x.dummyjson.com"
         }
       ],
       "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 1,
+      "minimumOrderQuantity": 8,
       "meta": {
-        "createdAt": "2024-05-23T08:56:21.620Z",
-        "updatedAt": "2024-05-23T08:56:21.620Z",
-        "barcode": "7113807059215",
+        "createdAt": "2024-05-23T08:56:21.619Z",
+        "updatedAt": "2024-05-23T08:56:21.619Z",
+        "barcode": "0887083199279",
         "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/1.png",
-        "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/2.png",
-        "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/3.png"
+        "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/1.png",
+        "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/2.png",
+        "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/3.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Bed/thumbnail.png",
-      "quantity": 1,
-      "user": "454a"
-    },
-    {
-      "id": "107",
-      "title": "Beats Flex Wireless Earphones",
-      "description": "The Beats Flex Wireless Earphones offer a comfortable and versatile audio experience. With magnetic earbuds and up to 12 hours of battery life, they are ideal for everyday use.",
-      "category": "mobile-accessories",
-      "price": 49.99,
-      "discountPercentage": 8.27,
-      "rating": 4.17,
-      "stock": 49,
-      "tags": [
-        "electronics",
-        "wireless earphones"
-      ],
-      "brand": "Beats",
-      "sku": "7N15J2UK",
-      "weight": 6,
-      "dimensions": {
-        "width": 23.49,
-        "height": 15.22,
-        "depth": 20.05
-      },
-      "warrantyInformation": "1 week warranty",
-      "shippingInformation": "Ships overnight",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Very satisfied!",
-          "date": "2024-05-23T08:56:21.624Z",
-          "reviewerName": "Hannah Robinson",
-          "reviewerEmail": "hannah.robinson@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Awesome product!",
-          "date": "2024-05-23T08:56:21.624Z",
-          "reviewerName": "Grace Perry",
-          "reviewerEmail": "grace.perry@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Very satisfied!",
-          "date": "2024-05-23T08:56:21.624Z",
-          "reviewerName": "Grayson Coleman",
-          "reviewerEmail": "grayson.coleman@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 19,
-      "meta": {
-        "createdAt": "2024-05-23T08:56:21.624Z",
-        "updatedAt": "2024-05-23T08:56:21.624Z",
-        "barcode": "4068884711976",
-        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/products/images/mobile-accessories/Beats%20Flex%20Wireless%20Earphones/1.png"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/mobile-accessories/Beats%20Flex%20Wireless%20Earphones/thumbnail.png",
+      "thumbnail": "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/thumbnail.png",
       "quantity": 1,
       "user": "454a"
     }
@@ -12133,7 +12183,108 @@
         "state": "Gujarat",
         "pinCode": "365620"
       },
-      "status": "pending"
+      "status": "dispatched",
+      "paymentStatus": "received"
+    },
+    {
+      "id": "92c3",
+      "items": [
+        {
+          "id": "132",
+          "title": "Samsung Galaxy S8",
+          "description": "The Samsung Galaxy S8 is a premium smartphone with an Infinity Display, offering a stunning visual experience. It boasts advanced camera capabilities and cutting-edge technology.",
+          "category": "smartphones",
+          "price": 499.99,
+          "discountPercentage": 2.69,
+          "rating": 3.69,
+          "stock": 75,
+          "tags": [
+            "smartphones",
+            "samsung galaxy"
+          ],
+          "brand": "Samsung",
+          "sku": "GLXQQKBF",
+          "weight": 6,
+          "dimensions": {
+            "width": 6.88,
+            "height": 8.96,
+            "depth": 18.13
+          },
+          "warrantyInformation": "Lifetime warranty",
+          "shippingInformation": "Ships in 3-5 business days",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 2,
+              "comment": "Very unhappy with my purchase!",
+              "date": "2024-05-23T08:56:21.625Z",
+              "reviewerName": "Christopher West",
+              "reviewerEmail": "christopher.west@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Very happy with my purchase!",
+              "date": "2024-05-23T08:56:21.625Z",
+              "reviewerName": "Hazel Evans",
+              "reviewerEmail": "hazel.evans@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Very happy with my purchase!",
+              "date": "2024-05-23T08:56:21.625Z",
+              "reviewerName": "Luna Russell",
+              "reviewerEmail": "luna.russell@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "No return policy",
+          "minimumOrderQuantity": 1,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.625Z",
+            "updatedAt": "2024-05-23T08:56:21.625Z",
+            "barcode": "1337599403784",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/1.png",
+            "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/2.png",
+            "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/3.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/thumbnail.png",
+          "quantity": 2,
+          "user": "454a"
+        }
+      ],
+      "totalAmount": 999.98,
+      "totalItems": 2,
+      "user": {
+        "id": "454a",
+        "email": "shubham@gmail.com",
+        "password": "Shubham123@",
+        "role": "user",
+        "addresses": [
+          {
+            "name": "shubham mangroliya",
+            "email": "shubham@gmail.com",
+            "phone": "6353618818",
+            "street": "sonalpark",
+            "city": "Amreli",
+            "state": "Gujarat",
+            "pinCode": "365620"
+          }
+        ]
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "shubham mangroliya",
+        "email": "shubham@gmail.com",
+        "phone": "6353618818",
+        "street": "sonalpark",
+        "city": "Amreli",
+        "state": "Gujarat",
+        "pinCode": "365620"
+      },
+      "status": "pending",
+      "paymentStatus": "pending"
     }
   ]
 }
