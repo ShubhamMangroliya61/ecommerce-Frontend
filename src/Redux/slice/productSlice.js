@@ -9,13 +9,7 @@ const initialState = {
   selectProduct: null,
   totalItems: 0,
 };
-export function fetchProduct() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/products");
-    const data = await response.json();
-    resolve({ data });
-  });
-}
+
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
     const response = await fetch(`http://localhost:3000/products/${id}`);
@@ -37,7 +31,7 @@ export function fetchBrands() {
     resolve({ data });
   });
 }
-export function fetchProductByFilter(filter, sort, pagination) {
+export function fetchProductByFilter(filter, sort, pagination,admin) {
   let queryString = "";
   for (let key in filter) {
     queryString += `${key}=${filter[key]}&`;
@@ -47,6 +41,9 @@ export function fetchProductByFilter(filter, sort, pagination) {
   }
   for (let key in pagination) {
     queryString += `${key}=${pagination[key]}&`;
+  }
+  if(admin){
+    queryString += `admin=true`;
   }
   return new Promise(async (resolve) => {
     const response = await fetch(
@@ -79,13 +76,7 @@ export function updateProduct(update) {
   });
 }
 
-export const fetchAllProductAsync = createAsyncThunk(
-  "product/fetchAllproduct",
-  async () => {
-    const response = await fetchProduct();
-    return response.data;
-  }
-);
+
 export const fetchProductByIdAsync = createAsyncThunk(
   "product/fetchProductById",
   async (id) => {
@@ -95,8 +86,8 @@ export const fetchProductByIdAsync = createAsyncThunk(
 );
 export const fetchAllProductAsyncByFilter = createAsyncThunk(
   "product/fetchAllproductfilter",
-  async ({ filter, sort, pagination }) => {
-    const response = await fetchProductByFilter(filter, sort, pagination);
+  async ({ filter, sort, pagination,admin }) => {
+    const response = await fetchProductByFilter(filter, sort, pagination,admin);
     return response.data;
   }
 );
@@ -138,13 +129,6 @@ export const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllProductAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchAllProductAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.products = action.payload;
-      })
       .addCase(fetchAllProductAsyncByFilter.pending, (state) => {
         state.status = "loading";
       })

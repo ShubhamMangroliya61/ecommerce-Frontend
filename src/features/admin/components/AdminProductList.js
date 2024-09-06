@@ -95,7 +95,7 @@ export default function AdminProductList() {
       try {
         const pagination = { _page: page, _per_page: 12 };
         await dispatch(
-          fetchAllProductAsyncByFilter({ filter, sort, pagination })
+          fetchAllProductAsyncByFilter({ filter, sort, pagination ,admin:true})
         );
       } catch (err) {
         console.error("Failed to fetch product:", err);

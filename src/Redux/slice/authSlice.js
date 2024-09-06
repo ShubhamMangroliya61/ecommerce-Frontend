@@ -6,7 +6,6 @@ const initialState = {
   loggedInUser: null,
   status: "idle",
   error :null,
-
 };
 
 export function createUser(userData) {
