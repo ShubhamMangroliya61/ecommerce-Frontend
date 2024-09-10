@@ -1,75 +1,60 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../helper/axioseInstance";
-import { updateUser } from "./userSlice";
+import { useSelector } from "react-redux";
+import { showToaster } from "../../utils/ToasterService";
+import { ToasterType } from "../../Constants/ToasterType";
 
 const initialState = {
   loggedInUser: null,
-  status: "idle",
-  error :null,
+  isLoading: false,
+  errorMess: null,
 };
 
-export function createUser(userData) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/users", {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
 export function signOut(userId) {
   return new Promise(async (resolve) => {
-    resolve({ data:'success' });
-  });
-}
-export function checkUser(loginInfo) {
-  return new Promise(async (resolve, reject) => {
-    const email = loginInfo.email;
-    const password = loginInfo.password;
-    const response = await fetch("http://localhost:3000/users?email=" + email);
-    const data = await response.json();
-    if (data.length) {
-      if (password === data[0].password) {
-        resolve({ data: data[0] });
-      } else {
-        reject({ message: "email and password invalid" });
-      }
-    } else {
-      reject({ message: "user not found" });
-    }
+    resolve({ data: "success" });
   });
 }
 
+export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
+  try {
+    const response = await axiosInstance.post("/auth/login", data);
+    if (response.data.success) {
+      return response.data;
+    } else {
+      return thunkAPI.rejectWithValue(await response.data);
+    }
+  } catch (error) {
+    if (error.response) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    } else {
+      return thunkAPI.rejectWithValue({ message: error.message });
+    }
+  }
+});
 export const createUserAsync = createAsyncThunk(
-  "user/createUser",
-  async (data) => {
-    const response = await createUser(data);
-    return response.data;
+  "auth/register",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post("/auth/register", data);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
-export const checkUserAsync = createAsyncThunk(
-  "user/checkUser",
-  async (data) => {
-    const response = await checkUser(data);
-    return response.data;
-  }
-);
-export const signOutAsync = createAsyncThunk(
-  "user/signOut",
-  async (data) => {
-    const response = await signOut(data);
-    return response.data;
-  }
-);
-export const updateUserAsync = createAsyncThunk(
-  "user/updateUser",
-  async (data) => {
-    const response = await updateUser(data);
-    return response.data;
-  }
-);
+export const signOutAsync = createAsyncThunk("user/signOut", async (data) => {
+  const response = await signOut(data);
+  return response.data;
+});
 
 export const authSlice = createSlice({
   name: "user",
@@ -78,44 +63,44 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createUserAsync.pending, (state) => {
-        state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.loggedInUser = action.payload;
+        showToaster(ToasterType.Success, action.payload.message);
+        state.isLoading = false;
+        state.loggedInUser = action.payload.data;
       })
-      .addCase(checkUserAsync.pending, (state) => {
-        state.status = "loading";
+      .addCase(createUserAsync.rejected, (state, action) => {
+        showToaster(ToasterType.Error, action.payload.message);
+        state.isLoading = false;
       })
-      .addCase(checkUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.loggedInUser = action.payload;
-
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(checkUserAsync.rejected, (state, action) => {
-        state.status = "idle";
-        state.error = action.error;
+      .addCase(login.fulfilled, (state, action) => {
+        showToaster(ToasterType.Success, action.payload.message);
+        state.isLoading = false;
+        state.loggedInUser = action.payload.data;
       })
-      .addCase(updateUserAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(updateUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.loggedInUser = action.payload;
+      .addCase(login.rejected, (state, action) => {
+        showToaster(ToasterType.Error, action.payload.message);
+        state.isLoading = false;
+        state.errorMess = action.payload.message;
       })
       .addCase(signOutAsync.pending, (state) => {
-        state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(signOutAsync.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.isLoading = false;
         state.loggedInUser = null;
-      })
+      });
   },
 });
 
 export const {} = authSlice.actions;
 
-export const selectLoggedInUser = (state) => state.auth.loggedInUser;
-export const selectError = (state) => state.auth.error;
+export const useSelectorAuthState = () => {
+  return useSelector((state) => state.auth);
+};
 
 export default authSlice.reducer;

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../helper/axioseInstance";
+import { showToaster } from "../../utils/ToasterService";
+import { ToasterType } from "../../Constants/ToasterType";
 
 const initialState = {
   products: [],
@@ -10,122 +12,145 @@ const initialState = {
   totalItems: 0,
 };
 
-export function fetchProductById(id) {
-  return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:3000/products/${id}`);
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function fetchCategory() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/category");
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function fetchBrands() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/brand");
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function fetchProductByFilter(filter, sort, pagination,admin) {
-  let queryString = "";
-  for (let key in filter) {
-    queryString += `${key}=${filter[key]}&`;
-  }
-  for (let key in sort) {
-    queryString += `${key}=${sort[key]}&`;
-  }
-  for (let key in pagination) {
-    queryString += `${key}=${pagination[key]}&`;
-  }
-  if(admin){
-    queryString += `admin=true`;
-  }
-  return new Promise(async (resolve) => {
-    const response = await fetch(
-      "http://localhost:3000/products?" + queryString
-    );
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function createProduct(product) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/products", {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function updateProduct(update) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/products/" + update.id, {
-      method: "PATCH",
-      body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-
-
 export const fetchProductByIdAsync = createAsyncThunk(
   "product/fetchProductById",
-  async (id) => {
-    const response = await fetchProductById(id);
-    return response.data;
+  async (id, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(`/products/${id}`);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const fetchAllProductAsyncByFilter = createAsyncThunk(
   "product/fetchAllproductfilter",
-  async ({ filter, sort, pagination,admin }) => {
-    const response = await fetchProductByFilter(filter, sort, pagination,admin);
-    return response.data;
+  async ({ filter, sort, pagination, admin }, thunkAPI) => {
+    try {
+      let queryString = "";
+      for (let key in filter) {
+        queryString += `${key}=${filter[key]}&`;
+      }
+      for (let key in sort) {
+        queryString += `${key}=${sort[key]}&`;
+      }
+      for (let key in pagination) {
+        queryString += `${key}=${pagination[key]}&`;
+      }
+      if (admin) {
+        queryString += `admin=true`;
+      }
+      const response = await axiosInstance.get(`/products?${queryString}`);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const fetchCategoryAsync = createAsyncThunk(
   "product/fetchCategory",
-  async () => {
-    const response = await fetchCategory();
-    return response.data;
+  async (thunkAPI) => {
+    try {
+      const response = await axiosInstance.get("/categories");
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const fetchBrandAsync = createAsyncThunk(
   "product/fetchBrand",
-  async () => {
-    const response = await fetchBrands();
-    return response.data;
+  async (thunkAPI) => {
+    try {
+      const response = await axiosInstance.get("/brands");
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const createProductAsync = createAsyncThunk(
   "product/createProduct",
-  async (product) => {
-    const response = await createProduct(product);
-    return response.data;
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(`/products`, data);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const updateProductAsync = createAsyncThunk(
   "product/updateProduct",
-  async (product) => {
-    const response = await updateProduct(product);
-    return response.data;
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.patch(`/products/${data.id}`, data);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    clearSelectedProduct:(state)=>{
-      state.selectProduct = null
-    }
+    clearSelectedProduct: (state) => {
+      state.selectProduct = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -134,34 +159,35 @@ export const productSlice = createSlice({
       })
       .addCase(fetchAllProductAsyncByFilter.fulfilled, (state, action) => {
         state.status = "idle";
-        state.products = action.payload.data;
-        state.totalItems = action.payload.items;
+        state.products = action.payload.data.products;
+        state.totalItems = action.payload.data.totalProducts;
       })
       .addCase(fetchCategoryAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchCategoryAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.categories = action.payload;
+        state.categories = action.payload.data;
       })
       .addCase(fetchBrandAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchBrandAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.brands = action.payload;
+        state.brands = action.payload.data;
       })
       .addCase(fetchProductByIdAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchProductByIdAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.selectProduct = action.payload;
+        state.selectProduct = action.payload.data;
       })
       .addCase(createProductAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(createProductAsync.fulfilled, (state, action) => {
+        showToaster(ToasterType.Success, action.payload.message);
         state.status = "idle";
         state.products.push(action.payload);
       })
@@ -169,6 +195,7 @@ export const productSlice = createSlice({
         state.status = "loading";
       })
       .addCase(updateProductAsync.fulfilled, (state, action) => {
+        showToaster(ToasterType.Success, action.payload.message);
         state.status = "idle";
         const index = state.products.findIndex(
           (item) => item.id === action.payload.id

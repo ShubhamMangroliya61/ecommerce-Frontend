@@ -1,14 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { selectLoggedInUser } from '../../Redux/slice/authSlice'
 import { Navigate } from 'react-router-dom';
+import { useSelectorAuthState } from '../../Redux/slice/authSlice';
 
 function ProtectedAdmin({children}) {
-  const user= useSelector(selectLoggedInUser);
-  if(!user){
+  const { loggedInUser } = useSelectorAuthState();
+  if(!loggedInUser){
     return <Navigate to="/login" ></Navigate>
   }
-  if(!user && user.role!=='admin'){
+  if(!loggedInUser && loggedInUser.role!=='admin'){
     return <Navigate to="/" ></Navigate>
   }
   return children;

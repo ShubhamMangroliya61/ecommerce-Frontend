@@ -19,7 +19,10 @@ import {
   fecthLoggedInUserAsync,
   selectUserInfo,
 } from "../../Redux/slice/userSlice";
-import { selectLoggedInUser } from "../../Redux/slice/authSlice";
+import {
+  selectLoggedInUser,
+  useSelectorAuthState,
+} from "../../Redux/slice/authSlice";
 import { useEffect } from "react";
 
 const userNavigation = [
@@ -38,15 +41,15 @@ function classNames(...classes) {
 }
 function Navbar({ children }) {
   const dispatch = useDispatch();
-  const logInUser = useSelector(selectLoggedInUser);
+  const { loggedInUser } = useSelectorAuthState();
   useEffect(() => {
-    if (logInUser) {
-      dispatch(fecthLoggedInUserAsync(logInUser.id));
+    if (loggedInUser) {
+      dispatch(fecthLoggedInUserAsync(loggedInUser.id));
     }
-  }, [dispatch]);
+  }, []);
   const items = useSelector(selectedCart);
   const user = useSelector(selectUserInfo);
-
+  const isButtonDisabled = items.length === 0;
   return (
     <>
       {user && (
@@ -91,6 +94,7 @@ function Navbar({ children }) {
                     <Link to="/cart">
                       <button
                         type="button"
+                        disabled={isButtonDisabled}
                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="absolute -inset-1.5" />
@@ -101,10 +105,11 @@ function Navbar({ children }) {
                         />
                       </button>
                     </Link>
-                    <span className="inline-flex z-20 items-center rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                      {items.length}
-                    </span>
-                    {/* Profile dropdown */}
+                    {items.length > 0 && (
+                      <span className="inline-flex z-20 items-center rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                        {items.length}
+                      </span>
+                    )}
                     <Menu as="div" className="relative ml-3">
                       <div>
                         <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

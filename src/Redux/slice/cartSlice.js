@@ -1,88 +1,106 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../helper/axioseInstance";
+import { ToasterType } from "../../Constants/ToasterType";
+import { showToaster } from "../../utils/ToasterService";
 
 const initialState = {
   items: [],
   status: "idle",
 };
-export function addToCart(item) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/cart", {
-      method: "POST",
-      body: JSON.stringify(item),
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function fetchItemsByUserId(userId) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/cart?user=" + userId);
-    const data = await response.json();
-    resolve({ data });
-  });
-}
-export function updateCart(update) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/cart/" + update.id, {
-      method: "PATCH",
-      body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data });
-  });
-}
 
-export function deleteItemFromCart(itemId) {
-  return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:3000/cart/" + itemId, {
-      method: "DELETE",
-      headers: { "content-type": "application/json" },
-    });
-    const data = await response.json();
-    resolve({ data: { id: itemId } });
-  });
-}
 export function resetCart(userId) {
   return new Promise(async (resolve) => {
-    const response = await fetchItemsByUserId(userId);
-    const items = response.data;
-    for (let item of items) {
-      await deleteItemFromCart(item.id);
-    }
+    // const response = await fetchItemsByUserId(userId);
+    // const items = response.data;
+    // for (let item of items) {
+    //   await deleteItemFromCart(item.id);
+    // }
     resolve({status:'success'});
   });
 }
+
 export const addToCartAsync = createAsyncThunk(
   "cart/addToCart",
-  async (item) => {
-    const response = await addToCart(item);
-    return response.data;
+  async (item, thunkAPI) => {
+    console.log(item);
+    
+    try {
+      const response = await axiosInstance.post(`/cart`,item);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const fetchItemByUserIdAsync = createAsyncThunk(
   "cart/fetchItemByUserId",
-  async (userId) => {
-    const response = await fetchItemsByUserId(userId);
-    return response.data;
+  async (thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(`/cart/own`);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const updateCartAsync = createAsyncThunk(
   "cart/updateCart",
-  async (item) => {
-    const response = await updateCart(item);
-    return response.data;
+  async (item,thunkAPI) => {
+    try {
+      const response = await axiosInstance.patch(`/cart/${item.id}`,item);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const deleteItemFromCartAsync = createAsyncThunk(
   "cart/deleteItemFromCart",
-  async (itemId) => {
-    const response = await deleteItemFromCart(itemId);
-    return response.data;
+  async (itemId,thunkAPI) => {
+    try {
+      const response = await axiosInstance.delete(`/cart/${itemId}`);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
+
 export const resetCartAsync = createAsyncThunk(
   "cart/resetCart",
   async (userId) => {
@@ -101,33 +119,36 @@ export const cartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addToCartAsync.fulfilled, (state, action) => {
+        showToaster(ToasterType.Success, action.payload.message);
         state.status = "idle";
-        state.items.push(action.payload);
-      })
+        state.items.push(action.payload.data);
+        })
       .addCase(fetchItemByUserIdAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchItemByUserIdAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.items = action.payload;
+        state.items = action.payload.data;
       })
       .addCase(updateCartAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(updateCartAsync.fulfilled, (state, action) => {
+        showToaster(ToasterType.Success, action.payload.message);
         state.status = "idle";
         const index = state.items.findIndex(
-          (item) => item.id === action.payload.id
+          (item) => item.id === action.payload.data.id
         );
-        state.items[index] = action.payload;
+        state.items[index] = action.payload.data;
       })
       .addCase(deleteItemFromCartAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(deleteItemFromCartAsync.fulfilled, (state, action) => {
+        showToaster(ToasterType.Success, action.payload.message);
         state.status = "idle";
         const index = state.items.findIndex(
-          (item) => item.id === action.payload.id
+          (item) => item.id === action.payload.data.id
         );
         state.items.splice(index, 1);
       })

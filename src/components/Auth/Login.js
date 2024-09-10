@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { Link, Navigate } from "react-router-dom";
 import { Regex } from "../../Constants/Regex";
-import {
-  checkUserAsync,
-  selectError,
-  selectLoggedInUser,
-} from "../../Redux/slice/authSlice";
+import { login, useSelectorAuthState } from "../../Redux/slice/authSlice";
+import LoaderComponent from "../Loader/Loader";
 export default function Login() {
   const dispatch = useDispatch();
   const {
@@ -18,14 +15,14 @@ export default function Login() {
     watch,
   } = useForm();
 
-  const error = useSelector(selectError);
-  const user = useSelector(selectLoggedInUser);
+  const { loggedInUser, errorMess, isLoading } = useSelectorAuthState();
   const onSubmit = async (data) => {
-    await dispatch(checkUserAsync(data));
+    await dispatch(login(data));
   };
   return (
     <>
-      {user && <Navigate to="/"></Navigate>}
+      {loggedInUser && <Navigate to="/"></Navigate>}
+      <LoaderComponent isLoader={isLoading} />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -112,8 +109,8 @@ export default function Login() {
                 </p>
               )}
             </div>
-            {error && (
-              <p className="mt-2 text-sm text-red-600">{error.message}</p>
+            {errorMess && (
+              <p className="mt-2 text-sm text-red-600">{errorMess}</p>
             )}
             <div>
               <button

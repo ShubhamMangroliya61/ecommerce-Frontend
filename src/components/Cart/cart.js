@@ -12,12 +12,12 @@ export default function Cart() {
   const [open, setOpen] = useState(true);
   const items = useSelector(selectedCart);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => item.product.price * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
   const handleQty = async (e, item) => {
-    await dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+    await dispatch(updateCartAsync({ ...item, quantity: e.target.value }));
   };
   const handleRemove = async (e, id) => {
     await dispatch(deleteItemFromCartAsync(id));
@@ -37,7 +37,7 @@ export default function Cart() {
                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                     <img
                       alt={product.title}
-                      src={product.thumbnail}
+                      src={product.product.thumbnail}
                       className="h-full w-full object-cover object-center"
                     />
                   </div>
@@ -46,9 +46,9 @@ export default function Cart() {
                     <div>
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <h3>
-                          <a href={product.href}>{product.title}</a>
+                          <a href={product.product.href}>{product.product.title}</a>
                         </h3>
-                        <p className="ml-4">{product.price}</p>
+                        <p className="ml-4">{product.product.price}</p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
                         {product.brand}

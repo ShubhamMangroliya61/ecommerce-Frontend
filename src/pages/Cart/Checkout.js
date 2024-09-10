@@ -7,11 +7,11 @@ import {
   updateCartAsync,
 } from "../../Redux/slice/cartSlice";
 import { useForm } from "react-hook-form";
-import { selectLoggedInUser, updateUserAsync } from "../../Redux/slice/authSlice";
 import {
   createOrderAsync,
   selectCurrentOrder,
 } from "../../Redux/slice/orderSlice";
+import { selectUserInfo, updateUserAsync } from "../../Redux/slice/userSlice";
 
 function Checkout() {
   const [open, setOpen] = useState(true);
@@ -20,6 +20,7 @@ function Checkout() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const orderPlaced = useSelector(selectCurrentOrder);
+  const isOrderDisbale= !selectedAddress;
   const {
     register,
     handleSubmit,
@@ -27,14 +28,15 @@ function Checkout() {
     reset,
     watch,
   } = useForm();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
+  
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => item.product.price * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
   const handleQty = async (e, item) => {
-    await dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+    await dispatch(updateCartAsync({ ...item, quantity: e.target.value }));
   };
 
   const handleRemove = async (e, id) => {
@@ -42,7 +44,6 @@ function Checkout() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     await dispatch(
       updateUserAsync({ ...user, addresses: [...user.addresses, data] })
     );
@@ -60,7 +61,7 @@ function Checkout() {
       items,
       totalAmount,
       totalItems,
-      user,
+      user : user.id,
       paymentMethod,
       selectedAddress,
       status: "pending",
@@ -355,7 +356,7 @@ function Checkout() {
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
                             alt={product.title}
-                            src={product.thumbnail}
+                            src={product.product.thumbnail}
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
@@ -364,12 +365,12 @@ function Checkout() {
                           <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
                               <h3>
-                                <a href={product.href}>{product.title}</a>
+                                <a href={product.href}>{product.product.title}</a>
                               </h3>
-                              <p className="ml-4">{product.price}</p>
+                              <p className="ml-4">{product.product.price}</p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
-                              {product.brand}
+                              {product.product.brand}
                             </p>
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">
@@ -423,7 +424,7 @@ function Checkout() {
                 </p>
                 <div className="mt-6">
                   <div
-                    onClick={handleOrder}
+                     onClick={!isOrderDisbale ? handleOrder : undefined}
                     className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   >
                     Order Now

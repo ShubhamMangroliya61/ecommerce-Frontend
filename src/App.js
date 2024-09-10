@@ -8,7 +8,7 @@ import {
 import ProductDetailsPage from "./pages/Product/ProductDetailsPage";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchItemByUserIdAsync } from "./Redux/slice/cartSlice";
-import { selectLoggedInUser } from "./Redux/slice/authSlice";
+import { selectLoggedInUser, useSelectorAuthState, useSelectorUserState } from "./Redux/slice/authSlice";
 import PageNotFound from "./pages/404";
 import { fecthLoggedInUserAsync } from "./Redux/slice/userSlice";
 import AdminProductDetailsPage from "./pages/Admin/AdminProductDetailsPage";
@@ -136,13 +136,11 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const {loggedInUser} = useSelectorAuthState();
   useEffect(() => {
-    if (user) {
-      dispatch(fetchItemByUserIdAsync(user.id));
-      dispatch(fecthLoggedInUserAsync(user.id));
-    }
-  }, [dispatch]);
+      dispatch(fetchItemByUserIdAsync());
+      dispatch(fecthLoggedInUserAsync());
+  }, [loggedInUser]);
 
   return (
     <div className="App">

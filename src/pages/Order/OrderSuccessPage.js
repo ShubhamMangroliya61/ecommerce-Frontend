@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { selectLoggedInUser } from "../../Redux/slice/authSlice";
+import { useSelectorAuthState } from "../../Redux/slice/authSlice";
 import { resetCartAsync } from "../../Redux/slice/cartSlice";
 import { resetOrder } from "../../Redux/slice/orderSlice";
 
 function OrderSuccessPage() {
   const params = useParams();
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const { loggedInUser } = useSelectorAuthState();
   useEffect(() => {
-    if (user?.id) { 
-      dispatch(resetCartAsync(user.id));
+    if (loggedInUser?.id) { 
+      dispatch(resetCartAsync(loggedInUser.id));
       dispatch(resetOrder());
     }
-  }, [dispatch, user]);
+  }, [dispatch, loggedInUser]);
   return (
     <>
       {!params.id && <Navigate to="/" replace={true}></Navigate>}

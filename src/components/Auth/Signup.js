@@ -1,12 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { Regex } from "../../Constants/Regex";
 import {
   createUserAsync,
-  selectLoggedInUser,
+  useSelectorAuthState,
 } from "../../Redux/slice/authSlice";
+import LoaderComponent from "../Loader/Loader";
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function SignUp() {
     watch,
   } = useForm();
   const password = watch("password");
-  const user = useSelector(selectLoggedInUser);
+  const { loggedInUser, isLoading } = useSelectorAuthState();
 
   const onSubmit = async (data) => {
     await dispatch(
@@ -25,14 +26,15 @@ export default function SignUp() {
         email: data.email,
         password: data.password,
         addresses: [],
-        role:'user'
+        role: "user",
       })
     );
   };
 
   return (
     <>
-      {user && <Navigate to="/"></Navigate>}
+      {loggedInUser && <Navigate to="/"></Navigate>}
+      <LoaderComponent isLoader={isLoading} />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
