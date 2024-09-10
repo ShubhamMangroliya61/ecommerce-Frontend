@@ -12020,70 +12020,6 @@
       "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
       "quantity": 1,
       "user": "cb7e"
-    },
-    {
-      "id": "8",
-      "title": "Dior J'adore",
-      "description": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
-      "category": "fragrances",
-      "price": 89.99,
-      "discountPercentage": 17.44,
-      "rating": 3.31,
-      "stock": 91,
-      "tags": [
-        "fragrances",
-        "perfumes"
-      ],
-      "brand": "Dior",
-      "sku": "E70NB03B",
-      "weight": 10,
-      "dimensions": {
-        "width": 21.51,
-        "height": 7,
-        "depth": 26.51
-      },
-      "warrantyInformation": "Lifetime warranty",
-      "shippingInformation": "Ships in 2 weeks",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Fast shipping!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Zoe Nicholson",
-          "reviewerEmail": "zoe.nicholson@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Excellent quality!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Addison Wright",
-          "reviewerEmail": "addison.wright@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Would buy again!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Clara Berry",
-          "reviewerEmail": "clara.berry@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 8,
-      "meta": {
-        "createdAt": "2024-05-23T08:56:21.619Z",
-        "updatedAt": "2024-05-23T08:56:21.619Z",
-        "barcode": "0887083199279",
-        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/1.png",
-        "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/2.png",
-        "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/3.png"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/fragrances/Dior%20J'adore/thumbnail.png",
-      "quantity": 1,
-      "user": "454a"
     }
   ],
   "orders": [
@@ -12285,6 +12221,103 @@
       },
       "status": "pending",
       "paymentStatus": "pending"
+    },
+    {
+      "id": "fb31",
+      "items": [
+        {
+          "id": "2",
+          "title": "Eyeshadow Palette with Mirror",
+          "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+          "category": "beauty",
+          "price": 19.99,
+          "discountPercentage": 5.5,
+          "rating": 3.28,
+          "stock": 44,
+          "tags": [
+            "beauty",
+            "eyeshadow"
+          ],
+          "brand": "Glamour Beauty",
+          "sku": "MVCFH27F",
+          "weight": 3,
+          "dimensions": {
+            "width": 12.42,
+            "height": 8.63,
+            "depth": 29.13
+          },
+          "warrantyInformation": "1 year warranty",
+          "shippingInformation": "Ships in 2 weeks",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 4,
+              "comment": "Very satisfied!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Liam Garcia",
+              "reviewerEmail": "liam.garcia@x.dummyjson.com"
+            },
+            {
+              "rating": 1,
+              "comment": "Very disappointed!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Nora Russell",
+              "reviewerEmail": "nora.russell@x.dummyjson.com"
+            },
+            {
+              "rating": 5,
+              "comment": "Highly impressed!",
+              "date": "2024-05-23T08:56:21.618Z",
+              "reviewerName": "Elena Baker",
+              "reviewerEmail": "elena.baker@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "30 days return policy",
+          "minimumOrderQuantity": 32,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.618Z",
+            "updatedAt": "2024-05-23T08:56:21.618Z",
+            "barcode": "2817839095220",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png",
+          "quantity": 1,
+          "user": "454a"
+        }
+      ],
+      "totalAmount": 19.99,
+      "totalItems": 1,
+      "user": {
+        "id": "454a",
+        "email": "shubham@gmail.com",
+        "password": "Shubham123@",
+        "role": "user",
+        "addresses": [
+          {
+            "name": "shubham mangroliya",
+            "email": "shubham@gmail.com",
+            "phone": "6353618818",
+            "street": "sonalpark",
+            "city": "Amreli",
+            "state": "Gujarat",
+            "pinCode": "365620"
+          }
+        ]
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "shubham mangroliya",
+        "email": "shubham@gmail.com",
+        "phone": "6353618818",
+        "street": "sonalpark",
+        "city": "Amreli",
+        "state": "Gujarat",
+        "pinCode": "365620"
+      },
+      "status": "pending"
     }
   ]
 }

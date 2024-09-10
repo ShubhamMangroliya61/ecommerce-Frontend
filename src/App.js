@@ -1,33 +1,31 @@
 import React, { useEffect } from "react";
-import Home from "./pages/Home";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-
 import {
   createBrowserRouter,
   RouterProvider,
   Route,
   Link,
 } from "react-router-dom";
-import CartPage from "./pages/CartPage";
-import Checkout from "./pages/Checkout";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
-import Protected from "./features/auth/components/Protected";
+import ProductDetailsPage from "./pages/Product/ProductDetailsPage";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchItemByUserIdAsync } from "./Redux/slice/cartSlice";
 import { selectLoggedInUser } from "./Redux/slice/authSlice";
 import PageNotFound from "./pages/404";
-import OrderSuccessPage from "./pages/OrderSuccessPage";
-import UserOrderPage from "./pages/UserOrderPage";
 import { fecthLoggedInUserAsync } from "./Redux/slice/userSlice";
-import Logout from "./features/auth/components/Logout";
-import UserProfilePage from "./pages/UserProfilePage";
-import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
-import AdminHome from "./pages/AdminHome";
-import AdminProductDetailsPage from "./pages/AdminProductDetailsPage";
-import AdminProductForm from "./pages/AdminProductForm";
-import AdminOrder from "./features/admin/components/AdminOrder";
-import AdminOrderPage from "./pages/AdminOrderPage";
+import AdminProductDetailsPage from "./pages/Admin/AdminProductDetailsPage";
+import LoginPage from "./pages/Login/LoginPage";
+import SignupPage from "./pages/Signup/SignupPage";
+import Home from "./pages/Home/Home";
+import Logout from "./components/Auth/Logout";
+import AdminHome from "./pages/Admin/AdminHome";
+import AdminOrderPage from "./pages/Admin/AdminOrderPage";
+import AdminProductForm from "./pages/Admin/AdminProductForm";
+import Protected from "./components/Auth/Protected";
+import ProtectedAdmin from "./components/Auth/ProtectedAdmin";
+import CartPage from "./pages/Cart/CartPage";
+import Checkout from "./pages/Cart/Checkout";
+import UserProfilePage from "./pages/User/UserProfilePage";
+import UserOrderPage from "./pages/Order/UserOrderPage";
+import OrderSuccessPage from "./pages/Order/OrderSuccessPage";
 
 const router = createBrowserRouter([
   {
