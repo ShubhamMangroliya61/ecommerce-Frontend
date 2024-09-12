@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 import { useCookies } from "react-cookie";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 function Protected({ children }) {
   const [cookies] = useCookies(["token"]);
-
+  const navigate = useNavigate();
   const decodeToken = () => {
     const token = cookies.token;
     let finalDecodedToken = null;
@@ -23,13 +23,13 @@ function Protected({ children }) {
     return expiryTime ? 1000 * expiryTime > Date.now() : false;
   };
 
-  // const isValid = useMemo(() => isTokenValid(cookies.token), [cookies.token]);
-  if(isTokenValid(cookies.token)){
-    return children;
+  const isValid = useMemo(() => isTokenValid(cookies.token), [cookies.token]);
+
+  if (!isValid) {
+    navigate("/login", { replace: true });
   }
-  else{
-    return <Navigate to="/login" replace />;
-  }
+
+  return children;
 }
 
 export default Protected;

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 function ProtectedAdmin({children}) {
   const [cookies] = useCookies(["token"]);
-
+  const navigate = useNavigate();
   const decodeToken = () => {
     const token = cookies.token;
     let finalDecodedToken = null;
@@ -30,7 +30,7 @@ function ProtectedAdmin({children}) {
   };
 
   if (!isTokenValid() && !isAdmin()) {
-    return <Navigate to="/login" replace />;
+    navigate("/login", { replace: true });
   }
 
   return children;
