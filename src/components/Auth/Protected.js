@@ -23,13 +23,13 @@ function Protected({ children }) {
     return expiryTime ? 1000 * expiryTime > Date.now() : false;
   };
 
-  const isValid = useMemo(() => isTokenValid(cookies.token), [cookies.token]);
-
-  if (!isValid) {
+  // const isValid = useMemo(() => isTokenValid(cookies.token), [cookies.token]);
+  if(isTokenValid(cookies.token)){
+    return children;
+  }
+  else{
     return <Navigate to="/login" replace />;
   }
-
-  return children;
 }
 
 export default Protected;
