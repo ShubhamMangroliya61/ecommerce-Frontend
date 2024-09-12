@@ -1,32 +1,31 @@
-import React from 'react';
-import RingLoader from 'react-spinners/RingLoader';
+import React from "react";
+import RingLoader from "react-spinners/RingLoader";
 
 const LoaderComponent = ({ isLoader }) => {
   const overlayStyle = {
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     zIndex: 1000,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    pointerEvents: 'none', 
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    pointerEvents: "none",
   };
 
   const loaderContainerStyle = {
-    position: 'fixed', 
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)', 
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     zIndex: 1001,
-};
-
+  };
 
   const loaderStyle = {
-    borderColor: 'red',
+    borderColor: "red",
   };
 
   return (

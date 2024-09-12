@@ -3,16 +3,13 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 export default function Pagination({ page, setPage, handlePage, totalItems }) {
     const totalPages = Math.ceil(totalItems / 10);
 
-    // Helper function to determine which pages to show
     const getPageNumbers = () => {
-        const range = 2; // Number of pages to show before and after the current page
+        const range = 2; 
         let pages = [];
 
         if (totalPages <= 5) {
-            // If there are 5 or fewer pages, show all
             pages = Array.from({ length: totalPages }, (_, i) => i + 1);
         } else {
-            // More than 5 pages, add ellipses
             if (page <= 3) {
                 pages = [1, 2, 3, 4, 5, '...', totalPages];
             } else if (page >= totalPages - 2) {

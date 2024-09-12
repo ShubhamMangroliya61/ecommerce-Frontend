@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 function Protected({ children }) {
   const [cookies] = useCookies(["token"]);
@@ -23,8 +23,10 @@ function Protected({ children }) {
     return expiryTime ? 1000 * expiryTime > Date.now() : false;
   };
 
-  if (!isTokenValid()) {
-    return <Navigate to="/login" replace />;
+  const isValid = useMemo(() => isTokenValid(), [cookies.token]);
+
+  if (!isValid) {
+    return <Navigate to="/login"/>;
   }
 
   return children;

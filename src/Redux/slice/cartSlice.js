@@ -8,24 +8,13 @@ const initialState = {
   status: "idle",
 };
 
-export function resetCart(userId) {
-  return new Promise(async (resolve) => {
-    // const response = await fetchItemsByUserId(userId);
-    // const items = response.data;
-    // for (let item of items) {
-    //   await deleteItemFromCart(item.id);
-    // }
-    resolve({status:'success'});
-  });
-}
-
 export const addToCartAsync = createAsyncThunk(
   "cart/addToCart",
   async (item, thunkAPI) => {
     console.log(item);
-    
+
     try {
-      const response = await axiosInstance.post(`/cart`,item);
+      const response = await axiosInstance.post(`/cart`, item);
       if (response.data.success) {
         return response.data;
       } else {
@@ -63,9 +52,9 @@ export const fetchItemByUserIdAsync = createAsyncThunk(
 
 export const updateCartAsync = createAsyncThunk(
   "cart/updateCart",
-  async (item,thunkAPI) => {
+  async (item, thunkAPI) => {
     try {
-      const response = await axiosInstance.patch(`/cart/${item.id}`,item);
+      const response = await axiosInstance.patch(`/cart/${item.id}`, item);
       if (response.data.success) {
         return response.data;
       } else {
@@ -83,7 +72,7 @@ export const updateCartAsync = createAsyncThunk(
 
 export const deleteItemFromCartAsync = createAsyncThunk(
   "cart/deleteItemFromCart",
-  async (itemId,thunkAPI) => {
+  async (itemId, thunkAPI) => {
     try {
       const response = await axiosInstance.delete(`/cart/${itemId}`);
       if (response.data.success) {
@@ -103,9 +92,21 @@ export const deleteItemFromCartAsync = createAsyncThunk(
 
 export const resetCartAsync = createAsyncThunk(
   "cart/resetCart",
-  async (userId) => {
-    const response = await resetCart(userId);
-    return response.data;
+  async (userId, thunkAPI) => {
+    try {
+      const response = await axiosInstance.delete(`/cart/resetcart/${userId}`);
+      if (response.data.success) {
+        return response.data;
+      } else {
+        return thunkAPI.rejectWithValue(await response.data);
+      }
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue({ message: error.message });
+      }
+    }
   }
 );
 
@@ -122,7 +123,7 @@ export const cartSlice = createSlice({
         showToaster(ToasterType.Success, action.payload.message);
         state.status = "idle";
         state.items.push(action.payload.data);
-        })
+      })
       .addCase(fetchItemByUserIdAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -157,8 +158,8 @@ export const cartSlice = createSlice({
       })
       .addCase(resetCartAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.items =[];
-      })
+        state.items = [];
+      });
   },
 });
 

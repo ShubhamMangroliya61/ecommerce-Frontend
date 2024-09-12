@@ -42,7 +42,7 @@ export const fecthLoggedInUserAsync = createAsyncThunk(
 
 export const fecthLoggedInUserOrdersAsync = createAsyncThunk(
   "user/fecthLoggedInUserOrders",
-  async ( thunkAPI) => {
+  async (thunkAPI) => {
     try {
       const response = await axiosInstance.get(`/orders/own`);
       if (response.data.success) {
@@ -83,11 +83,7 @@ export const updateUserAsync = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fecthLoggedInUserAsync.pending, (state) => {
@@ -98,7 +94,7 @@ export const userSlice = createSlice({
         state.userInfo = action.payload.data;
       })
       .addCase(fecthLoggedInUserAsync.rejected, (state, action) => {
-        showToaster(ToasterType.Error, action.payload.message);
+        // showToaster(ToasterType.Error, action.payload.message);
         state.isLoading = false;
       })
       .addCase(updateUserAsync.pending, (state) => {

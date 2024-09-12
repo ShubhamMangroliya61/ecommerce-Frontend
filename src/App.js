@@ -26,6 +26,7 @@ import Checkout from "./pages/Cart/Checkout";
 import UserProfilePage from "./pages/User/UserProfilePage";
 import UserOrderPage from "./pages/Order/UserOrderPage";
 import OrderSuccessPage from "./pages/Order/OrderSuccessPage";
+import StripeCheckout from "./pages/Payment/StripeChackout";
 
 const router = createBrowserRouter([
   {
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/admin/product-details/:id",
+    path: "/product-details/:id",
     element: (
       <Protected>
         <ProductDetailsPage></ProductDetailsPage>
@@ -101,7 +102,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/product-details/:id",
+    path: "/admin/product-details/:id",
     element: (
       <ProtectedAdmin>
         <AdminProductDetailsPage></AdminProductDetailsPage>
@@ -117,6 +118,14 @@ const router = createBrowserRouter([
     element: (
       <Protected>
         <UserOrderPage></UserOrderPage>
+      </Protected>
+    ),
+  },
+  {
+    path: '/stripe-checkout/',
+    element: (
+      <Protected>
+        <StripeCheckout></StripeCheckout>
       </Protected>
     ),
   },

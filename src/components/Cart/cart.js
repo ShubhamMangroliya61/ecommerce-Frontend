@@ -48,7 +48,7 @@ export default function Cart() {
                         <h3>
                           <a href={product.product.href}>{product.product.title}</a>
                         </h3>
-                        <p className="ml-4">{product.product.price}</p>
+                        <p className="ml-4">${product.product.price}</p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
                         {product.brand}
