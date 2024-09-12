@@ -24,7 +24,7 @@ import {
   useSelectorAuthState,
 } from "../../Redux/slice/authSlice";
 import { useEffect } from "react";
-
+import ecommerceLogo from '../../assets/ecommerce-logo.png';
 const userNavigation = [
   { name: "Your Profile", link: "/profile" },
   { name: "My order", link: "/orders" },
@@ -62,7 +62,7 @@ function Navbar({ children }) {
                     <Link to="/">
                       <img
                         alt="Your Company"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        src={ecommerceLogo}
                         className="h-8 w-8"
                       />
                     </Link>

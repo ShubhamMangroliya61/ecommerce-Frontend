@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-
+import ecommerceLogo from '../../assets/ecommerce-logo.png';
 import { Link, Navigate } from "react-router-dom";
 import { Regex } from "../../Constants/Regex";
 import { login, useSelectorAuthState } from "../../Redux/slice/authSlice";
@@ -27,10 +27,10 @@ export default function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
+            src={ecommerceLogo}
+            className="mx-auto h-16 w-auto"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
         </div>
@@ -99,6 +99,7 @@ export default function Login() {
                     },
                   })}
                   id="password"
+                  autoComplete='true'
                   type="password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />

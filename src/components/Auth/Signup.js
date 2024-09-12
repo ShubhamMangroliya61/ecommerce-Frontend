@@ -8,6 +8,7 @@ import {
   useSelectorAuthState,
 } from "../../Redux/slice/authSlice";
 import LoaderComponent from "../Loader/Loader";
+import ecommerceLogo from '../../assets/ecommerce-logo.png';
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -39,10 +40,11 @@ export default function SignUp() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
+            src={ecommerceLogo}
+            className="mx-auto h-16 w-auto"
+            
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create a new Account
           </h2>
         </div>
@@ -72,6 +74,7 @@ export default function SignUp() {
                     },
                   })}
                   type="email"
+                  autoComplete='true'
                   className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
                     errors.email ? "ring-red-500" : ""
                   }`}
@@ -102,6 +105,7 @@ export default function SignUp() {
                     },
                   })}
                   type="password"
+                  autoComplete='true'
                   className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
                     errors.password ? "ring-red-500" : ""
                   }`}
@@ -130,6 +134,7 @@ export default function SignUp() {
                       value === password || "Passwords do not match",
                   })}
                   type="password"
+                  autoComplete='true'
                   className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
                     errors.confirmpassword ? "ring-red-500" : ""
                   }`}

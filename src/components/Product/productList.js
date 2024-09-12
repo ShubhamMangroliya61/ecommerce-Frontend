@@ -108,7 +108,7 @@ export default function ProductList() {
   useEffect(() => {
     dispatch(fetchBrandAsync());
     dispatch(fetchCategoryAsync());
-  }, [dispatch]);
+  },[]);
 
   return (
     <div className="bg-white">
