@@ -17,16 +17,16 @@ function Protected({ children }) {
     return finalDecodedToken;
   };
 
-  const isTokenValid = () => {
-    const decodedToken = decodeToken();
+  const isTokenValid = (token) => {
+    const decodedToken = decodeToken(token);
     const expiryTime = decodedToken?.exp;
     return expiryTime ? 1000 * expiryTime > Date.now() : false;
   };
 
-  const isValid = useMemo(() => isTokenValid(), [cookies.token]);
+  const isValid = useMemo(() => isTokenValid(cookies.token), [cookies.token]);
 
   if (!isValid) {
-    return <Navigate to="/login"/>;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
