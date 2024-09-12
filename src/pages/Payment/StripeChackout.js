@@ -5,10 +5,8 @@ import CheckoutForm from "./CheckoutFrom";
 import "./Stripe.css";
 import { useSelector } from "react-redux";
 import { selectCurrentOrder } from "../../Redux/slice/orderSlice";
-
-const stripePromise = loadStripe(
-  "pk_test_51PxjlmJ6MvCbIOBu6vHaq2YMHirsKHIcj3cU0oJPtD1caEEk4XgNS5tllP93dDQAH7pi2SzdRJDGmJaG51GxnFVm00ZTCkQk2l"
-);
+const stripekey=process.env.REACT_APP_STRIPE_KEY
+const stripePromise = loadStripe(stripekey);
 
 export default function StripeCheckout() {
   const [clientSecret, setClientSecret] = useState("");
