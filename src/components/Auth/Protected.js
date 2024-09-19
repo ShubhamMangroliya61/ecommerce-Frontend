@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 function Protected({ children }) {
@@ -26,7 +26,7 @@ function Protected({ children }) {
   const isValid = useMemo(() => isTokenValid(cookies.token), [cookies.token]);
 
   if (!isValid) {
-    navigate("/login", { replace: true });
+    return <Navigate to="login"/>
   }
 
   return children;

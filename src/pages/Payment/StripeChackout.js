@@ -5,7 +5,7 @@ import CheckoutForm from "./CheckoutFrom";
 import "./Stripe.css";
 import { useSelector } from "react-redux";
 import { selectCurrentOrder } from "../../Redux/slice/orderSlice";
-const stripekey=process.env.REACT_APP_STRIPE_KEY
+const stripekey = process.env.REACT_APP_STRIPE_KEY;
 const stripePromise = loadStripe(stripekey);
 
 export default function StripeCheckout() {
@@ -13,12 +13,16 @@ export default function StripeCheckout() {
   const [dpmCheckerLink, setDpmCheckerLink] = useState("");
   const currentOrder = useSelector(selectCurrentOrder);
   console.log(currentOrder);
-  
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}/create-payment-intent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ totalAmount: currentOrder.totalAmount }),
+      body: JSON.stringify({
+        totalAmount: currentOrder.totalAmount,
+        orderId: currentOrder.id,
+      }),
+      meta: { orderId: currentOrder.id },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -35,12 +39,12 @@ export default function StripeCheckout() {
   };
 
   return (
-      <div className="Stripe">
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm/>
-          </Elements>
-        )}
-      </div>
+    <div className="Stripe">
+      {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </div>
   );
 }
